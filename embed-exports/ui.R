@@ -4,27 +4,27 @@ shinyUI(
   function(request) {
     fluidPage(
       theme = "css/custom.min.css",
-      
+
       fluidRow(
         useShinyjs(),
-        
         div(
           id = "content",
           column(
             12,
             style = "height:100vh",
             htmlOutput("title", container = tags$h2),
-            highchartOutput("exports_treemap_detailed", height = "95%")
+            highchartOutput("exports_treemap_detailed", height = "92%"),
+            p("Source: Open Trade Statistics.")
           )
         ),
-        
+
         hidden(
           div(
             id = "controls",
             column(
               4,
               # Controls ----------------------------------------------------------------
-              
+
               selectInput(
                 "y",
                 "Year:",
@@ -33,7 +33,7 @@ shinyUI(
                 selectize = FALSE
               )
             ),
-            
+
             column(
               4,
               selectInput(
@@ -44,7 +44,7 @@ shinyUI(
                 selectize = FALSE
               )
             ),
-            
+
             column(
               4,
               selectInput(
@@ -54,16 +54,10 @@ shinyUI(
                 selected = NULL,
                 selectize = FALSE
               )
-            ),
-            
-            column(
-              12,
-              align = "center",
-              actionButton("go", "Go!")
             )
           )
         ),
-        
+
         tags$footer(
           tags$link(rel = "shortcut icon", href = "img/favicon.ico")
         )

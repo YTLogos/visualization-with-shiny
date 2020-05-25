@@ -8,13 +8,12 @@ shinyUI(
       fluidRow(
         useShinyjs(),
         div(
-          id = "contents",
-
+          id = "content",
           column(
             12,
             style = "height:100vh",
             htmlOutput("title", container = tags$h2),
-            highchartOutput("imports_treemap_detailed", height = "92%"),
+            highchartOutput("trade_aggregated", height = "92%"),
             p("Source: Open Trade Statistics.")
           )
         ),
@@ -22,12 +21,21 @@ shinyUI(
         hidden(
           div(
             id = "controls",
-
             column(
               4,
+              # Controls ----------------------------------------------------------------
+
               selectInput(
-                "y",
-                "Year:",
+                "y1",
+                "Year 1:",
+                choices = available_years_min:available_years_max,
+                selected = NULL,
+                selectize = FALSE
+              ),
+
+              selectInput(
+                "y2",
+                "Year 2:",
                 choices = available_years_min:available_years_max,
                 selected = NULL,
                 selectize = FALSE
@@ -59,7 +67,8 @@ shinyUI(
         ),
 
         tags$footer(
-          tags$link(rel = "shortcut icon", href = "img/favicon.ico")
+          tags$link(rel = "shortcut icon", href = "https://tradestatistics.io/images/favicon.ico"),
+          tags$script(src = "js/copy-url.js")
         )
       )
     )

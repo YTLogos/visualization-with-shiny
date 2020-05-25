@@ -8,9 +8,15 @@ library(highcharter)
 
 # URLs --------------------------------------------------------------------
 
-base_url <- "http://localhost:8080"
-# base_url <- "https://api.tradestatistics.io"
-site_url <- "shiny.tradestatistics.io"
+running_on_server <- T
+
+if (running_on_server == TRUE) {
+  base_url <- "http://localhost:8080"
+  use_localhost <- TRUE
+} else {
+  base_url <- "https://api.tradestatistics.io"
+  use_localhost <- FALSE
+}
 
 # Tables ------------------------------------------------------------------
 
@@ -19,8 +25,6 @@ countries <- ots_countries %>%
 
 products <- ots_products %>%
   arrange(product_code)
-
-communities <- ots_communities
 
 # Choices -----------------------------------------------------------------
 
@@ -53,16 +57,24 @@ enableBookmarking(store = "url")
 # Highcharts --------------------------------------------------------------
 
 hc_export_menu <- list(
-  list(text="Download PNG image",
-       onclick=JS("function () { 
-                  this.exportChart({ type: 'image/png' }); }")),
-  list(text="Download JPEG image",
-       onclick=JS("function () { 
-                  this.exportChart({ type: 'image/jpeg' }); }")),
-  list(text="Download SVG vector image",
-       onclick=JS("function () { 
-                  this.exportChart({ type: 'image/svg+xml' }); }")),
-  list(text="Download PDF document",
-       onclick=JS("function () { 
-                  this.exportChart({ type: 'application/pdf' }); }"))
+  list(
+    text = "Download PNG image",
+    onclick = JS("function () { 
+                  this.exportChart({ type: 'image/png' }); }")
+  ),
+  list(
+    text = "Download JPEG image",
+    onclick = JS("function () { 
+                  this.exportChart({ type: 'image/jpeg' }); }")
+  ),
+  list(
+    text = "Download SVG vector image",
+    onclick = JS("function () { 
+                  this.exportChart({ type: 'image/svg+xml' }); }")
+  ),
+  list(
+    text = "Download PDF document",
+    onclick = JS("function () { 
+                  this.exportChart({ type: 'application/pdf' }); }")
+  )
 )
